@@ -1,0 +1,16 @@
+{
+    "name": "maleianefernando/api-shield",
+    "description": "A laravel package to add a  security layer for apis by implementing hmac, nonce, timestamp validation and",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "Maleianefernando\\ApiShield\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Fernando Maleiane"
+        }
+    ],
+    "require": {}
+}
