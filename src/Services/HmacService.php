@@ -4,9 +4,9 @@ namespace Maleianefernando\ApiShield\Services;
 
 class HmacService
 {
-    public function write(string $data, string $secret): string
+    public function write(string $pattern, string $secret): string
     {
-        return hash_hmac('sha256', $data, $secret);
+        return hash_hmac('sha256', $pattern, $secret);
     }
 
     public function check(array $hmac): bool

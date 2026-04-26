@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Maleianefernando\ApiShield\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Maleianefernando\ApiShield\Services\HmacService;
 
 final class ApiShieldServiceProvider extends ServiceProvider
 {
@@ -13,6 +14,7 @@ final class ApiShieldServiceProvider extends ServiceProvider
     public function register(): void
     {
         // Register your services here
+        $this->app->singleton(HmacService::class);
     }
 
     /**
