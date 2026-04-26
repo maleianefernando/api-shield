@@ -9,8 +9,23 @@
     },
     "authors": [
         {
-            "name": "Fernando Maleiane"
+            "role":"Developer",
+            "name": "Fernando Maleiane",
+            "email": "maleianefernando3@gmail.com"
         }
     ],
-    "require": {}
+    "require": {
+        "php": "^8.3",
+        "illuminate/support": "^13.6"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Maleianefernando\\ApiShield\\ApiShieldServiceProvider"
+            ]
+        },
+        "aliases": {
+            "ApiShield": "Maleianefernando\\ApiShield\\Facades"
+        }
+    }
 }
