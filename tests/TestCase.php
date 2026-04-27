@@ -27,4 +27,9 @@ class TestCase extends \Orchestra\Testbench\TestCase
 
         parent::setUp();
     }
+
+    protected function defineRoutes($router)
+    {
+        return parent::defineRoutes($router);
+    }
 }

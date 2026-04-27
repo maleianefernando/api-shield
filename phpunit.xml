@@ -1,5 +1,10 @@
-<testsuites>
-    <testsuite name="Hmac">
-        <directory suffix="Test.php">./tests/Feature</directory>
-    </testsuite>
-</testsuites>
+<phpunit>
+    <php>
+        <env name="HMAC_SECRET" value="z@LZdMeyJbcDQxauD-4+qRMWMGa8Aqgx" />
+    </php>
+    <testsuites>
+        <testsuite name="HmacService">
+            <directory suffix="Test.php">./tests/Unit</directory>
+        </testsuite>
+    </testsuites>
+</phpunit>
