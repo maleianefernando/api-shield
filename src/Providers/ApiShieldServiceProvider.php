@@ -5,7 +5,8 @@ namespace Maleianefernando\ApiShield\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Maleianefernando\ApiShield\Services\HmacService;
-
+use Maleianefernando\ApiShield\Services\NonceService;
+use Maleianefernando\ApiShield\Services\TimestampService;
 final class ApiShieldServiceProvider extends ServiceProvider
 {
     /**
@@ -15,6 +16,8 @@ final class ApiShieldServiceProvider extends ServiceProvider
     {
         // Register your services here
         $this->app->singleton(HmacService::class);
+        $this->app->singleton(NonceService::class);
+        $this->app->singleton(TimestampService::class);
     }
 
     /**
