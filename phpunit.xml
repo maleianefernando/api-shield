@@ -1,0 +1,5 @@
+<testsuites>
+    <testsuite name="Hmac">
+        <directory suffix="Test.php">./tests/Feature</directory>
+    </testsuite>
+</testsuites>
