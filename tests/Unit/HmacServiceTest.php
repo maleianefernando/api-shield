@@ -31,7 +31,7 @@ class HmacServiceTest extends TestCase
     public function it_checks_a_hash_generated_on_nodejs ()
     {
         // dump("Secret:". getenv('HMAC_SECRET'));
-        $hmacService = new HmacService('z@LZdMeyJbcDQxauD-4+qRMWMGa8Aqgx');
+        $hmacService = new HmacService(getenv('HMAC_SECRET'));
         $phpHash = $hmacService->write('Hello World');
 
         $nodeJsHash = 'd56770bbcaf2efa08d96cc7cbebd1e5c08972d496ad846d1c345522a671c88cc';
@@ -39,5 +39,16 @@ class HmacServiceTest extends TestCase
         $this->assertTrue($hmacService->check([$nodeJsHash, $phpHash]));
     }
 
+    #[Test]
+    public function it_checks_for_an_invalid_secret()
+    {
+        $hmacService = new HmacService(getenv('HMAC_SECRET'));
+        $hash = $hmacService->write('Hello World');
+
+        $diffHmacService = new HmacService('z@LZdMeyJbcDQxauD-4+qRMWMGa8Aqg');
+        $diffHash = $diffHmacService->write('Hello World');
+
+        $this->assertFalse($hmacService->check([$hash, $diffHash]));
+    }
 
 }
