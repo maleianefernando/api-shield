@@ -9,14 +9,14 @@
     },
     "authors": [
         {
-            "role":"Developer",
+            "role": "Developer",
             "name": "Fernando Maleiane",
             "email": "maleianefernando3@gmail.com"
         }
     ],
     "require": {
         "php": "^8.3",
-        "illuminate/support": "^13.6"
+        "illuminate/support": "^11.0"
     },
     "extra": {
         "laravel": {
@@ -27,5 +27,33 @@
         "aliases": {
             "ApiShield": "Maleianefernando\\ApiShield\\Facades"
         }
+    },
+    "require-dev": {
+        "orchestra/testbench": "^9.0"
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/",
+            "Tests\\App\\": "tests/app/",
+            "Tests\\Database\\Factories\\": "tests/database/factories/",
+            "Tests\\Database\\Seeders\\": "tests/database/seeders/",
+            "App\\": "tests/app/",
+            "Database\\Factories\\": "tests/database/factories/",
+            "Database\\Seeders\\": "tests/database/seeders/"
+        }
+    },
+    "scripts": {
+        "post-autoload-dump": [
+            "@clear",
+            "@prepare"
+        ],
+        "clear": "@php vendor/bin/testbench package:purge-skeleton --ansi",
+        "prepare": "@php vendor/bin/testbench package:discover --ansi",
+        "build": "@php vendor/bin/testbench workbench:build --ansi",
+        "serve": [
+            "Composer\\Config::disableProcessTimeout",
+            "@build",
+            "@php vendor/bin/testbench serve --ansi"
+        ]
     }
 }
