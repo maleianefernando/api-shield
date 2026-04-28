@@ -5,14 +5,14 @@ use Illuminate\Http\Request;
 use Closure;
 use Maleianefernando\ApiShield\Facades\Hmac;
 use Maleianefernando\ApiShield\Facades\Nonce;
+use Maleianefernando\ApiShield\Facades\ShieldUtils;
 use Maleianefernando\ApiShield\Facades\Timestamp;
-use Maleianefernando\ApiShield\Utilities\Utilities;
 
 class ApiShield
 {
     public function handle(Request $request, Closure $next)
     {
-        if(!Utilities::validateRequestHeaders($request))
+        if(!ShieldUtils::validateRequestHeaders($request))
         {
             abort(400, "There is security headers missing.");
         }
@@ -21,18 +21,28 @@ class ApiShield
         $nonce = $request->header("X-Nonce");
         $hmac = $request->header("X-Signature");
 
-        $serverHmac = Hmac::write('Hello world');
+        
+        // dump($request->method());
+        // dump($request->getRequestUri());
+        // dump($request->header("X-timestamp"));
+        // dump($request->header("X-Nonce"));
+        // dump($request->getContent());
         
         if(!Timestamp::isValid($timestamp))
         {
             abort(400, "Invalid request timestamp.");
         }
-
+        
         if(Nonce::exists($nonce))
         {
             abort(401, "Possible replay attack detected.");
         }
-
+        
+        $pattern = ShieldUtils::generateStringForHashPattern($request);
+        dump("Server: ".$pattern);
+        $serverHmac = Hmac::write($pattern);
+        // dump($pattern);
+        
         if(!Hmac::check([$serverHmac, $hmac]))
         {
             abort(400, "Invalid request hash.");
