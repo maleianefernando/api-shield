@@ -1,7 +1,9 @@
 <?php
 namespace Tests;
 
-use Illuminate\Contracts\Config\Repository; 
+use Illuminate\Contracts\Config\Repository;
+use Illuminate\Support\Facades\Route;
+use Maleianefernando\ApiShield\Middleware\ApiShield;
 
 class TestCase extends \Orchestra\Testbench\TestCase
 {
@@ -50,6 +52,14 @@ class TestCase extends \Orchestra\Testbench\TestCase
 
     protected function defineRoutes($router)
     {
-        return parent::defineRoutes($router);
+        Route::get('/hello-world', function (){
+            return 'I am not protected.';
+        });
+
+        Route::get('/hello-shield', function (){
+            return 'Uhhh, you did it.';
+        })
+        ->middleware(ApiShield::class)
+        ;
     }
 }
