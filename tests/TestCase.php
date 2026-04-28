@@ -21,7 +21,7 @@ class TestCase extends \Orchestra\Testbench\TestCase
             $config->set('apishield.secret', 'z@LZdMeyJbcDQxauD-4+qRMWMGa8Aqgx');
             $config->set('apishield.noncettl', 60);
             $config->set('apishield.timestamplimit', 60);
-
+            $config->set('apishield.nonceprefix', 'api_shield');
             $config->set('cache.default', 'redis'); // Tested: 'file' | 'redis'
 
             // $config->set('database.connections.testbench', [ 

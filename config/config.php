@@ -1,7 +1,8 @@
 <?php
 
 return [
-    'apishield.secret' => env('AS_SECRET'),
+    'secret' => env('AS_SECRET'),
     'noncettl' => env('AS_NONCE_TTL', 300),
-    'timestamplimit' => env('AS_TIMESTAMP_LIMIT', 300),
+    'nonceprefix' => env('AS_NONCE_PREFIX', 'api_shield'),
+    'timestamplimit' => env('AS_TIMESTAMP_LIMIT', 120),
 ];
