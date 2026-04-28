@@ -14,7 +14,7 @@ class ApiShield
     {
         if(!Utilities::validateRequestHeaders($request))
         {
-            abort(401, "There is security headers missing.");
+            abort(400, "There is security headers missing.");
         }
 
         $timestamp = $request->header("X-Timestamp");
