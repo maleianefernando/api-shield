@@ -53,13 +53,13 @@ class TestCase extends \Orchestra\Testbench\TestCase
     protected function defineRoutes($router)
     {
         Route::get('/hello-world', function (){
-            return 'I am not protected.';
-        });
+            return 'I am protected now.';
+        })
+        ->middleware(ApiShield::class);
 
-        Route::get('/hello-shield', function (){
+        Route::post('/hello-shield', function (){
             return 'Uhhh, you did it.';
         })
-        ->middleware(ApiShield::class)
-        ;
+        ->middleware(ApiShield::class);
     }
 }
