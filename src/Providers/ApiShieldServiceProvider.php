@@ -7,6 +7,8 @@ use Illuminate\Support\ServiceProvider;
 use Maleianefernando\ApiShield\Services\HmacService;
 use Maleianefernando\ApiShield\Services\NonceService;
 use Maleianefernando\ApiShield\Services\TimestampService;
+use Maleianefernando\ApiShield\Utilities\UtilitiesService;
+
 final class ApiShieldServiceProvider extends ServiceProvider
 {
     /**
@@ -23,6 +25,9 @@ final class ApiShieldServiceProvider extends ServiceProvider
         });
         $this->app->singleton(TimestampService::class, function() {
             return new TimestampService();
+        });
+        $this->app->singleton(UtilitiesService::class, function() {
+            return new UtilitiesService();
         });
         
         $this->mergeConfigFrom(__DIR__.'/../../config/config.php', 'apishield');
