@@ -15,9 +15,15 @@ final class ApiShieldServiceProvider extends ServiceProvider
     public function register(): void
     {
         // Register your services here
-        $this->app->singleton(HmacService::class);
-        $this->app->singleton(NonceService::class);
-        $this->app->singleton(TimestampService::class);
+        $this->app->singleton(HmacService::class, function() {
+            return new HmacService();
+        });
+        $this->app->singleton(NonceService::class, function() {
+            return new NonceService();
+        });
+        $this->app->singleton(TimestampService::class, function() {
+            return new TimestampService();
+        });
         
         $this->mergeConfigFrom(__DIR__.'/../../config/config.php', 'apishield');
         }
