@@ -2,7 +2,6 @@
 namespace Tests\Test;
 
 use Maleianefernando\ApiShield\Facades\Hmac;
-use Maleianefernando\ApiShield\Services\HmacService;
 use Tests\TestCase;
 
 class HmacTest extends TestCase
