@@ -1,6 +1,7 @@
 <?php
 namespace Tests\Test;
 
+use Maleianefernando\ApiShield\Facades\Hmac;
 use Maleianefernando\ApiShield\Services\HmacService;
 use Tests\TestCase;
 
@@ -12,9 +13,8 @@ class HmacTest extends TestCase
         //     '--tag' => 'apishield'
         // ]);
 
-        $h = new HmacService();
-        $hash = $h->write('Hello world');
+        $hash = Hmac::write('Hello world');
 
-        $this->assertTrue($h->check([$hash, hash_hmac('sha256', 'Hello world', config('apishield.secret'))]));
+        $this->assertTrue(Hmac::check([$hash, hash_hmac('sha256', 'Hello world', config('apishield.secret'))]));
     }
 }
