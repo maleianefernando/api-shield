@@ -18,7 +18,9 @@ final class ApiShieldServiceProvider extends ServiceProvider
         $this->app->singleton(HmacService::class);
         $this->app->singleton(NonceService::class);
         $this->app->singleton(TimestampService::class);
-    }
+        
+        $this->mergeConfigFrom(__DIR__.'/../../config/config.php', 'apishield');
+        }
 
     /**
      * Bootstrap any application services.
@@ -26,5 +28,8 @@ final class ApiShieldServiceProvider extends ServiceProvider
     public function boot(): void
     {
         // Boot your services here
+        $this->publishes([
+            __DIR__.'/../../config/config.php' => config_path('apishield.php')
+        ], 'apishield');
     }
 }
