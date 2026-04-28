@@ -2,7 +2,7 @@
 namespace Tests\Test;
 
 use Illuminate\Support\Str;
-use Maleianefernando\ApiShield\Services\NonceService;
+use Maleianefernando\ApiShield\Facades\Nonce;
 use Tests\TestCase;
 
 class NonceTest extends TestCase
@@ -10,16 +10,14 @@ class NonceTest extends TestCase
     public function test_nonce_persistence()
     {
         $uuid = Str::uuid();
-        $a = new NonceService();
         // dump($uuid);
         
-        $this->assertTrue($a->persist('api_shield:'.'4954eafc-c5d6-48d6-acf0-175581d3dc32'));
+        $this->assertTrue(Nonce::persist('api_shield:'.'4954eafc-c5d6-48d6-acf0-175581d3dc32'));
     }
 
     public function test_nonce_retrieving()
     {
-        $n = new NonceService();
-
-        $this->assertTrue($n->exists('api_shield:4954eafc-c5d6-48d6-acf0-175581d3dc32'));
+        // sleep(config('apishield.noncettl'));
+        $this->assertTrue(Nonce::exists('api_shield:4954eafc-c5d6-48d6-acf0-175581d3dc32'));
     }
 }
