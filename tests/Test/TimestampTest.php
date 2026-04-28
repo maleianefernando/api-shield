@@ -1,15 +1,13 @@
 <?php
 namespace Tests\Test;
 
-use Maleianefernando\ApiShield\Services\TimestampService;
 use Tests\TestCase;
+use Maleianefernando\ApiShield\Facades\Timestamp;
 
 class TimestampTest extends TestCase
 {
     public function test_timestamp()
     {
-        $t = new TimestampService();
-        
-        $this->assertTrue($t->isValid(time()));
+        $this->assertTrue(Timestamp::isValid(time()));
     }
 }
