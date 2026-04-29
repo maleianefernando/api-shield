@@ -11,7 +11,7 @@ class TimestampService
     
     public function __construct()
     {
-        $this->limit = config('apishield.timestamplimit');
+        $this->limit = config('apishield.timestamp_limit');
     }
         
     public function isValid(int $timestamp): bool

@@ -9,8 +9,8 @@ class NonceService
     private $ttl = null, $prefix = null;
     public function __construct()
     {
-        $this->ttl = config('apishield.noncettl');
-        $this->prefix = config('apishield.nonceprefix');
+        $this->ttl = config('apishield.nonce_ttl');
+        $this->prefix = config('apishield.nonce_prefix');
     }
 
     public function persist(string $nonce)

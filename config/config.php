@@ -2,7 +2,8 @@
 
 return [
     'secret' => env('AS_SECRET'),
-    'noncettl' => env('AS_NONCE_TTL', 300),
-    'nonceprefix' => env('AS_NONCE_PREFIX', 'api_shield'),
-    'timestamplimit' => env('AS_TIMESTAMP_LIMIT', 120),
+    'nonce_ttl' => env('AS_NONCE_TTL', 300),
+    'nonce_prefix' => env('AS_NONCE_PREFIX', 'api_shield'),
+    'timestamp_limit' => env('AS_TIMESTAMP_LIMIT', 120),
+    'middleware_alias' => 'api-shield',
 ];

@@ -36,7 +36,7 @@ class MiddlewareTest extends TestCase
         }
     }
 
-    public function est_protected_function()
+    public function test_protected_function()
     {
         $body = [
             "name" => "John Doe",

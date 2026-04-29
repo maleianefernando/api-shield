@@ -2,8 +2,9 @@
 namespace Tests;
 
 use Illuminate\Contracts\Config\Repository;
+use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;
-use Maleianefernando\ApiShield\Middleware\ApiShield;
+use Maleianefernando\ApiShield\Middleware\ApiShieldMiddleware;
 
 class TestCase extends \Orchestra\Testbench\TestCase
 {
@@ -21,10 +22,11 @@ class TestCase extends \Orchestra\Testbench\TestCase
     {
         tap($app['config'], function(Repository $config) {
             $config->set('apishield.secret', 'z@LZdMeyJbcDQxauD-4+qRMWMGa8Aqgx');
-            $config->set('apishield.noncettl', 60);
-            $config->set('apishield.timestamplimit', 60);
-            $config->set('apishield.nonceprefix', 'api_shield');
+            $config->set('apishield.nonce_ttl', 60);
+            $config->set('apishield.timestamp_limit', 60);
+            $config->set('apishield.nonce_prefix', 'api_shield');
             $config->set('cache.default', 'redis'); // Tested: 'file' | 'redis'
+            $config->set('apishield.middleware_alias', 'apishield');
 
             // $config->set('database.connections.testbench', [ 
             //     'driver'   => 'mysql', 
@@ -55,11 +57,11 @@ class TestCase extends \Orchestra\Testbench\TestCase
         Route::get('/hello-world', function (){
             return 'I am protected now.';
         })
-        ->middleware(ApiShield::class);
+        ->middleware(ApiShieldMiddleware::class);
 
         Route::post('/hello-shield', function (){
             return 'Uhhh, you did it.';
         })
-        ->middleware(ApiShield::class);
+        ->middleware(ApiShieldMiddleware::class);
     }
 }

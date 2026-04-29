@@ -3,7 +3,9 @@ declare(strict_types=1);
 
 namespace Maleianefernando\ApiShield\Providers;
 
+use Illuminate\Routing\Router;
 use Illuminate\Support\ServiceProvider;
+use Maleianefernando\ApiShield\Middleware\ApiShieldMiddleware;
 use Maleianefernando\ApiShield\Services\HmacService;
 use Maleianefernando\ApiShield\Services\NonceService;
 use Maleianefernando\ApiShield\Services\TimestampService;
@@ -36,11 +38,17 @@ final class ApiShieldServiceProvider extends ServiceProvider
     /**
      * Bootstrap any application services.
      */
-    public function boot(): void
+    public function boot(Router $router): void
     {
         // Boot your services here
         $this->publishes([
             __DIR__.'/../../config/config.php' => config_path('apishield.php')
         ], 'apishield');
+
+        $alias = config('apishield.middleware_alias', 'api-shield');
+        $router->aliasMiddleware(
+            'api-shield',
+            ApiShieldMiddleware::class
+        );
     }
 }
