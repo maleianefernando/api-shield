@@ -21,7 +21,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Maleianefernando\\ApiShield\\ApiShieldServiceProvider"
+                "Maleianefernando\\ApiShield\\Providers\\ApiShieldServiceProvider"
             ]
         },
         "aliases": {
