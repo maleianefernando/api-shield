@@ -8,7 +8,7 @@ use Maleianefernando\ApiShield\Facades\Nonce;
 use Maleianefernando\ApiShield\Facades\ShieldUtils;
 use Maleianefernando\ApiShield\Facades\Timestamp;
 
-class ApiShield
+class ApiShieldMiddleware
 {
     public function handle(Request $request, Closure $next)
     {
