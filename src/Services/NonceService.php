@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Cache;
 
 class NonceService
 {
-    private $ttl = null, $prefix = null;
+    private string $ttl = '', $prefix = '';
     public function __construct()
     {
         $this->ttl = config('apishield.nonce_ttl');
@@ -29,7 +29,20 @@ class NonceService
         return false;
     }
 
-    private function getPatternedNonce ($nonce): string
+    public function get(string $nonce)
+    {
+        if(Cache::has($this->getPatternedNonce($nonce)))
+        {
+            return [
+                "key" => $this->getPatternedNonce($nonce),
+                "value" => Cache::get($this->getPatternedNonce($nonce))
+            ];
+        }
+
+        return null;
+    }
+
+    private function getPatternedNonce (string $nonce): string
     {
         return "{$this->prefix}_{$nonce}";
     }

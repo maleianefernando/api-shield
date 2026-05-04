@@ -9,6 +9,15 @@ class UtilitiesService
 {
     public static function validateRequestHeaders(Request $request)
     {
+        $hasFile = $request->hasFile('file');
+        $hasFileHash = $request->hasHeader("X-File-Hash");
+        
+        if($hasFile) {
+            if (! $hasFileHash) {
+                return false;
+            }
+        }
+
         if(
             $request->hasHeader("X-Timestamp")
             && $request->hasHeader("X-Nonce")
@@ -22,9 +31,13 @@ class UtilitiesService
 
     public static function generateStringForHashPattern(Request $request)
     {
+        $data = $request->except(['file']);
+        ksort($data);
+        $body = json_encode($data);
+
         $method = Str::upper($request->method());
         $uri = $request->getRequestUri();
-        $rawBody = $request->getContent();
+        $rawBody = $body;
         $timestamp = $request->header("X-Timestamp");
         $nonce = $request->header("X-Nonce");
 

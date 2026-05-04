@@ -17,6 +17,15 @@ class ApiShieldMiddleware
             abort(400, "There is security headers missing.");
         }
 
+        $file = $request->file('file');
+        if($request->hasFile('file')) {
+            $fileHash = hash_file('sha256', $file->getRealPath());
+
+            if(! hash_equals($fileHash, $request->header("X-File-Hash"))) {
+                abort(400, "File hash does not match.");
+            }
+        }
+
         $timestamp = $request->header("X-Timestamp");
         $nonce = $request->header("X-Nonce");
         $hmac = $request->header("X-Signature");
@@ -27,7 +36,7 @@ class ApiShieldMiddleware
         // dump($request->header("X-timestamp"));
         // dump($request->header("X-Nonce"));
         // dump($request->getContent());
-        
+        // return response(['client-ts' => $timestamp, 'srv-ts'=> time()]);
         if(!Timestamp::isValid($timestamp))
         {
             abort(400, "Invalid request timestamp.");
@@ -35,17 +44,21 @@ class ApiShieldMiddleware
         
         if(Nonce::exists($nonce))
         {
+            dump(Nonce::get($nonce));
             abort(401, "Possible replay attack detected.");
         }
-        
+
+        // $data = $request->except(['file']);
+        // ksort($data);
+        // $body = json_encode($data);
+        // return response(['uri' => $request->getRequestUri()]);
         $pattern = ShieldUtils::generateStringForHashPattern($request);
-        dump("Server: ".$pattern);
         $serverHmac = Hmac::write($pattern);
-        // dump($pattern);
+        return (['Hash equals' => hash_equals($serverHmac, $hmac)]);
         
         if(!Hmac::check([$serverHmac, $hmac]))
         {
-            abort(400, "Invalid request hash.");
+            abort(400, "Possible manipulation data attack detected.");
         }
 
         try

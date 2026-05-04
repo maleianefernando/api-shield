@@ -16,7 +16,7 @@ class MiddlewareTest extends TestCase
         $bodyHash = hash('sha256',$body);
 
         $pattern = "GET:/hello-world:{$bodyHash}:{$timestamp}:{$nonce}";
-        dump("Client: ".$pattern);
+        // dump("Client: ".$pattern);
         
         $this->withoutExceptionHandling();
         try
@@ -42,13 +42,13 @@ class MiddlewareTest extends TestCase
             "name" => "John Doe",
             "Age" => 35
         ];
-        $nonce = time();
-        $timestamp = time();
+        $nonce = time()+1;
+        $timestamp = time()+1;
         $stringBody = json_encode($body);
         $bodyHash = hash('sha256',$stringBody);
 
         $pattern = "POST:/hello-shield:{$bodyHash}:{$timestamp}:{$nonce}";
-        dump("Client: ".$pattern);
+        // dump("Client: ".$pattern);
 
         $this->withoutExceptionHandling();
         try{
