@@ -28,6 +28,11 @@ class TestCase extends \Orchestra\Testbench\TestCase
             $config->set('cache.default', 'redis'); // Tested: 'file' | 'redis'
             $config->set('apishield.middleware_alias', 'apishield');
 
+            $config->set('apishield.rate_limit.soft', 60);
+            $config->set('apishield.rate_limit.hard', 120);
+            $config->set('apishield.rate_limit.decay_seconds', 60);
+            $config->set('apishield.rate_limit.block_period', 900);
+
             // $config->set('database.connections.testbench', [ 
             //     'driver'   => 'mysql', 
             //     'database' => 'testbench',
