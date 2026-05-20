@@ -42,7 +42,12 @@ final class ApiShieldServiceProvider extends ServiceProvider
     {
         // Boot your services here
         $this->publishes([
-            __DIR__.'/../../config/config.php' => config_path('apishield.php')
+            __DIR__.'/../../config/config.php' => config_path('apishield.php'),
+            // __DIR__.'/../../database/migrations/' => database_path('migrations')
+        ], 'apishield');
+
+        $this->publishesMigrations([
+            __DIR__.'/../database/migrations' => database_path('migrations'),
         ], 'apishield');
 
         $alias = config('apishield.middleware_alias', 'api-shield');
