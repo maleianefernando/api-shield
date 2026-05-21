@@ -8,12 +8,13 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('apishield_audit_logs', function (Blueprint $table) {
+        Schema::create('api_shield_audit_logs', function (Blueprint $table) {
             $table->id();
             $table->string('request_id')->nullable();
             $table->ipAddress('ip_address')->nullable();
             $table->text('user_agent')->nullable();
             $table->string('application_id')->nullable();
+            $table->string('application_name')->nullable();
             $table->string('endpoint')->nullable();
             $table->string('http_method')->nullable();
             $table->integer('status_code')->nullable();
@@ -27,6 +28,6 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists('apishield_audit_logs');
+        Schema::dropIfExists('api_shield_audit_logs');
     }
 };
