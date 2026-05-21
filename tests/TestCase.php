@@ -33,6 +33,9 @@ class TestCase extends \Orchestra\Testbench\TestCase
             $config->set('apishield.rate_limit.decay_seconds', 60);
             $config->set('apishield.rate_limit.block_period', 900);
 
+            $config->set('apishield.switch.enable_auditing', true);
+            $config->set('apishield.switch.enable_rate_limit', true);
+
             // $config->set('database.connections.testbench', [ 
             //     'driver'   => 'mysql', 
             //     'database' => 'testbench',
