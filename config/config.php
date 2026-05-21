@@ -7,7 +7,7 @@ return [
     'timestamp_limit' => env('AS_TIMESTAMP_LIMIT', 120),
     'middleware_alias' => 'api-shield',
 
-    'settings_switch' => [
+    'switch' => [
         
         'enable_rate_limit' => true,
         
@@ -24,8 +24,4 @@ return [
 
         'block_period' => env('AS_REQUEST_BLOCK_PERIOD', 900),
     ],
-
-    'auditing' => [
-        'auto_audit' => true
-    ]
 ];
