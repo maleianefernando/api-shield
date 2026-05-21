@@ -42,7 +42,33 @@ class UtilitiesService
         $nonce = $request->header("X-Nonce");
 
         $bodyHash = hash('sha256', $method == "GET" ? "" : $rawBody);
+        $clientCredentials = self::clientCredentials($request);
 
-        return "{$method}:{$uri}:{$bodyHash}:{$timestamp}:{$nonce}";
+        return $clientCredentials === null 
+        ? "{$method}:{$uri}:{$bodyHash}:{$timestamp}:{$nonce}" 
+        : "{$method}:{$uri}:{$bodyHash}:{$timestamp}:{$nonce}:{$clientCredentials}";
+    }
+
+    private static function clientCredentials(Request $request)
+    {
+        $id = $request->header("X-Client-Id");
+        $name = $request->header("X-Client-Name");
+        $hasId = false;
+        $hasName = false;
+
+        if(isset($id) && trim($id) !== "")
+            $hasId = true;
+
+        if(isset($name) && trim($name) !== "")
+            $hasName = true;
+
+        if($hasId && $hasName)
+            return "{$id}:{$name}";
+        else if($hasId)
+            return "{$id}";
+        else if($hasName)
+            return "{$name}";
+        else
+            return null;
     }
 }
