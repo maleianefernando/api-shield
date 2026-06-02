@@ -20,7 +20,7 @@ return new class extends Migration
             $table->integer('status_code')->nullable();
             $table->string('action')->nullable();
             $table->string('result')->nullable();
-            $table->string('failure_reason')->nullable();
+            $table->longText('failure_reason')->nullable();
             $table->integer('attempts')->nullable();
             $table->timestamps();
         });
