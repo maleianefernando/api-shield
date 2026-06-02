@@ -16,17 +16,11 @@ class TimestampService
         
     public function isValid(int $timestamp): bool
     {
-        throw_if(!is_numeric($timestamp), \Exception::class, "Please be sure that this is a valid timestamp.");
-        
         throw_if(!DateTime::createFromFormat('U', $timestamp), \Exception::class, "Please be sure that this is a valid timestamp.");
 
         // sleep(60);
-        $diff = abs(time() - $timestamp);
+        $diff = time() - $timestamp;
 
-        if($diff > $this->limit) {
-            return false;
-        }
-
-        return true;
+        return $diff <= $this->limit;
     }
 }
