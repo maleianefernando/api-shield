@@ -29,7 +29,7 @@ class UtilitiesService
         return false;
     }
 
-    public static function generateStringForHashPattern(Request $request)
+    public static function generateStringForHashPattern(Request $request, $fileHash = null)
     {
         $data = $request->except(['file']);
         ksort($data);
@@ -40,13 +40,14 @@ class UtilitiesService
         $rawBody = $body;
         $timestamp = $request->header("X-Timestamp");
         $nonce = $request->header("X-Nonce");
+        $fHash = $fileHash !== null ? $fileHash : "";
 
         $bodyHash = hash('sha256', $method == "GET" ? "" : $rawBody);
         $clientCredentials = self::clientCredentials($request);
-
+// return ['server rawbody' => $rawBody,'server pattern' => "{$method}:{$uri}:{$bodyHash}:{$timestamp}:{$nonce}"];
         return $clientCredentials === null 
-        ? "{$method}:{$uri}:{$bodyHash}:{$timestamp}:{$nonce}" 
-        : "{$method}:{$uri}:{$bodyHash}:{$timestamp}:{$nonce}:{$clientCredentials}";
+        ? "{$method}:{$uri}:{$bodyHash}:{$timestamp}:{$nonce}:{$fHash}" 
+        : "{$method}:{$uri}:{$bodyHash}:{$timestamp}:{$nonce}:{$fHash}:{$clientCredentials}";
     }
 
     private static function clientCredentials(Request $request)
