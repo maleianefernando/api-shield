@@ -51,7 +51,7 @@ Route::middleware(['api-shield'])->group(function () {
 
 ### Response Objects
 
-When the request is recognized by the library as genuine, there is no a return, but, where the library detects some issue, will return some errors:
+When the request is recognized by the library as genuine, there is no a return, but, when the library detects some issue, will return some errors:
 
 All error responses now has this structure:
 
@@ -94,7 +94,7 @@ All error responses now has this structure:
 ```
 
 #### Flood attack
-1. The client reaches the defined limits both soft and hard, the client is blocked the `api-shield` returns:
+1. When the client reaches the defined limits both soft and hard, the client is blocked and the `api-shield` returns:
 
 ```json
 {
@@ -153,12 +153,6 @@ AS_REQUEST_BLOCK_PERIOD=900                 # The period of client blocking afte
 ## Testing
 
 ```bash
-# Run all tests
-composer test
-
-# Run tests with coverage
-# ./vendor/bin/phpunit --coverage-html coverage
-
 # Run specific test suite
 ./vendor/bin/phpunit tests/Test/HmacTest.php
 ./vendor/bin/phpunit tests/Test/HmacTest.php
