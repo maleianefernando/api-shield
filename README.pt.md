@@ -4,12 +4,11 @@ Uma biblioteca Laravel projetada para adicionar camadas de segurança a APIs, ga
 
 ## Funcionalidades
 
-* **🚀 Suporte ao PHP 8.0+ moderno**: Desenvolvida com funcionalidades modernas do PHP, incluindo propriedades tipadas, argumentos nomeados e enumeradores
 * **📦 Middleware integrado**: Dispõe de um middleware nativo que funciona como uma camada unificada de proteção
 * **🔐 Validação de assinaturas HMAC**: Utiliza um hash baseado num segredo e os dados da requisição como conteúdo de entrada, garantindo a integridade dos dados
-* **✅ Validação do timestamp da requisição**: Cada requisição possui o seu próprio timestamp ou marcação temporal, permitindo ao servidor verificar a atualidade do pedido
-* **🔑 Validação do identificador do pedido**: Cada requisição possui um identificador único, permitindo detetar a repetição da mesma
-* **🔐 Registo de pedidos para auditoria**: Todas as requisições que passam por esta biblioteca são registados em logs
+* **✅ Validação do timestamp da requisição**: Cada requisição possui o seu próprio timestamp ou marcação temporal, permitindo ao servidor verificar a atualidade da requisição
+* **🔑 Validação do identificador da requisição**: Cada requisição possui um identificador único, permitindo detetar a repetição da mesma
+* **🔐 Registo das requisições para auditoria**: Todas as requisições que passam por esta biblioteca são registados em logs
 * **🔄 Integração com Laravel**: Integração nativa com o Laravel para funcionar como middleware, incluindo a publicação das configurações
 
 
@@ -80,7 +79,7 @@ Route::middleware(['api-shield'])->group(function () {
 
 ### Objectos de resposta
 
-Quando o pedido é reconhecido pela biblioteca como legítimo, não é retornado nenhum resultado. No entanto, quando a biblioteca deteta algum problema ou inconsistência, são retornados erros:
+Quando a requisição o é reconhecido pela biblioteca como legítimo, não é retornado nenhum resultado. No entanto, quando a biblioteca deteta algum problema ou inconsistência, são retornados erros:
 
 Todas as respostas tem a seguinte estrutura:
 
