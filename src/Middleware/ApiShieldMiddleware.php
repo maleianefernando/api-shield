@@ -60,10 +60,8 @@ class ApiShieldMiddleware
             $nonce = $request->header("X-Nonce");
             $hmac = $request->header("X-Signature");
 
-            // return response(["a" => env('AS_TIMESTAMP_LIMIT')]);
             if(!Timestamp::isValid($timestamp))
             {
-                // return "a";
                 return response()->json(
                     [
                         "status" => "Error",
@@ -85,7 +83,7 @@ class ApiShieldMiddleware
 
             $pattern = ShieldUtils::generateStringForHashPattern($request, $fileHash);
             $serverHmac = Hmac::write($pattern);
-            // return (['Hash equals' => hash_equals($serverHmac, $hmac)]);
+
             if(!Hmac::check([$serverHmac, $hmac]))
             {
                 return response()->json(
@@ -94,14 +92,11 @@ class ApiShieldMiddleware
                         "message" => "Possible data manipulation attack detected.",
                     ], 422
                 );
-                
             }
-            // return response(['hmac match' =>true]);
     
             try
             {
                 Nonce::persist($nonce);
-                // return response(['nonce' => $nonce]);
             }catch (\Exception $e)
             {
                 return response()->json(
