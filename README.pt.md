@@ -48,7 +48,7 @@ O comando acima serve para definitivamente criar a tabela `api_shield_audit_logs
 Para configurar a biblioteca são adicionadas as seguintes variáveis de ambiente ao ficheiro `.env`:
 
 ```env
-AS_SECRET='z@LZdMeyJbcDQxauD-4+qRMWMGa8Aqgx' #Chave para geraçao do HMAC
+AS_SECRET='sua-chave' #Chave para geraçao do HMAC
 AS_NONCE_TTL=900                            # Tempo em segundos para armazenamento do nonce no servidor
 # AS_NONCE_PREFIX                           # O prefixo para o nonce no servidor (opcional)
 AS_TIMESTAMP_LIMIT=900                      # Intervalo de tempo em segundos no qual uma requisição é válida
@@ -57,6 +57,11 @@ AS_HARD_RATE_LIMIT=120                      # Segundo limite de requisições qu
 AS_DECAY_RATE_SECONDS=120                   # Tempo em segundos para validação dos limites acima
 AS_REQUEST_BLOCK_PERIOD=900                 # Tempo em segundos de bloqueio de um cliente
 ```
+
+### Chave / Secret
+
+* Recomenda-se gerar a chave ou secret em [https://randomkeygen.com/encryption-key](https://randomkeygen.com/encryption-key)
+* Recomenda-se gerar uma chave de 256-bit (32 bytes) na categoria Encription Keygen
 
 ## Utilização
 
