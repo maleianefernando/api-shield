@@ -38,6 +38,7 @@ php artisan vendor:publish --tag=apishield
 O comando acima serve para publicar as configurações da biblioteca no projecto, ela aparecem em `config/api-shield.php`. Para alem de configuracoes esse comando publica uma migration da base de dados responsavel pela criacao da tabela para armazenamento de todas informações de rastreabilidade e auditoria.
 
 ### Executar a migration
+
 ```bash
 php artisan migrate
 ```
