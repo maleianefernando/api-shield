@@ -14,10 +14,14 @@ class TimestampService
         $this->limit = config('apishield.timestamp_limit');
     }
         
-    public function isValid(int $timestamp): bool
+    public function isValid($timestamp): bool
     {
-        // throw_if(!DateTime::createFromFormat('U', $timestamp), \Exception::class, "Please be sure that this is a valid timestamp.");
         try {
+            if (!is_numeric($timestamp)) {
+                return false;
+            }
+            $timestamp = (int) $timestamp;
+            
             if(!DateTime::createFromFormat('U', $timestamp)) {
                 return false;
             }
