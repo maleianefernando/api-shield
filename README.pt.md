@@ -27,7 +27,7 @@ Pode ser instalado via composer seguindo as instruções:
 
 2. Instalar a biblioteca atravéz do comando abaixo:
 ```bash
-composer require maleianefernando/api-shield:main-dev
+composer require maleianefernando/api-shield
 ```
 
 ## Integração com o Laravel
