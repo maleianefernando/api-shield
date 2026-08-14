@@ -17,13 +17,17 @@ class TimestampService
     public function isValid(int $timestamp): bool
     {
         // throw_if(!DateTime::createFromFormat('U', $timestamp), \Exception::class, "Please be sure that this is a valid timestamp.");
-        if(!DateTime::createFromFormat('U', $timestamp)) {
+        try {
+            if(!DateTime::createFromFormat('U', $timestamp)) {
+                return false;
+            }
+    
+            // sleep(60);
+            $diff = time() - $timestamp;
+    
+            return $diff <= $this->limit;
+        } catch (\Exception $e) {
             return false;
         }
-
-        // sleep(60);
-        $diff = time() - $timestamp;
-
-        return $diff <= $this->limit;
     }
 }
