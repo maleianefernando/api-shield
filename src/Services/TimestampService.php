@@ -26,7 +26,7 @@ class TimestampService
             $diff = time() - $timestamp;
     
             return $diff <= $this->limit;
-        } catch (\Exception $e) {
+        } catch (\Throwable $e) {
             return false;
         }
     }
