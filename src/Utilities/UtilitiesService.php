@@ -3,6 +3,7 @@
 namespace Maleianefernando\ApiShield\Utilities;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
 class UtilitiesService
@@ -44,7 +45,20 @@ class UtilitiesService
 
         $bodyHash = hash('sha256', $method == "GET" ? "" : $rawBody);
         $clientCredentials = self::clientCredentials($request);
+        Log::debug('=== LARAVEL HMAC DEBUG ===');
+        Log::debug('method: ' . $method);
+        Log::debug('uri: ' . $uri);
+        Log::debug('rawBody: ' . $rawBody);
+        Log::debug('bodyHash: ' . $bodyHash);
+        Log::debug('timestamp: ' . $timestamp);
+        Log::debug('nonce: ' . $nonce);
+        Log::debug('fHash: ' . $fHash);
+        Log::debug('clientCredentials: ' . ($clientCredentials ?? 'NULL'));
+
 // return ['server rawbody' => $rawBody,'server pattern' => "{$method}:{$uri}:{$bodyHash}:{$timestamp}:{$nonce}"];
+        
+        $bodyHash = '';
+        $fHash = '';
         return $clientCredentials === null 
         ? "{$method}:{$uri}:{$bodyHash}:{$timestamp}:{$nonce}:{$fHash}" 
         : "{$method}:{$uri}:{$bodyHash}:{$timestamp}:{$nonce}:{$fHash}:{$clientCredentials}";

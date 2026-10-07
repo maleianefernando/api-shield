@@ -3,6 +3,7 @@ namespace Maleianefernando\ApiShield\Middleware;
 
 use Illuminate\Http\Request;
 use Closure;
+use Illuminate\Support\Facades\Log;
 use Maleianefernando\ApiShield\Facades\Audit;
 use Maleianefernando\ApiShield\Facades\Hmac;
 use Maleianefernando\ApiShield\Facades\Nonce;
@@ -83,6 +84,9 @@ class ApiShieldMiddleware
 
             $pattern = ShieldUtils::generateStringForHashPattern($request, $fileHash);
             $serverHmac = Hmac::write($pattern);
+            Log::debug('pattern: ' . $pattern);
+            Log::debug('serverHmac: ' . $serverHmac);
+            Log::debug('==========================');
 
             if(!Hmac::check([$serverHmac, $hmac]))
             {
