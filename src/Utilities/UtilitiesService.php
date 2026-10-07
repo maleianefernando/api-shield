@@ -57,7 +57,7 @@ class UtilitiesService
 
 // return ['server rawbody' => $rawBody,'server pattern' => "{$method}:{$uri}:{$bodyHash}:{$timestamp}:{$nonce}"];
         
-        $bodyHash = '';
+        // $bodyHash = '';
         $fHash = '';
         return $clientCredentials === null 
         ? "{$method}:{$uri}:{$bodyHash}:{$timestamp}:{$nonce}:{$fHash}" 
